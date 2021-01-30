@@ -1,0 +1,5 @@
+export const GET_MOVIES="GET_MOVIES";
+export const LOADING_DATA="LOADING_DATA";
+export const SEARCH_MOVIES="SEARCH_MOVIES";
+export const ADD_TO_WATCHED="ADD_TO_WATCHED";
+

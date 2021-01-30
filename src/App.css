@@ -1,0 +1,15 @@
+.blackButton{
+  background-color: black;
+}
+
+.whiteButton{
+  background-color: white;
+}
+
+#darkMode{
+  background-color:yellow;
+}
+
+button.light{
+  background-color:red;
+}
