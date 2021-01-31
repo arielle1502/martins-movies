@@ -1,15 +1,13 @@
 import './App.css';
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Route} from 'react-router-dom';
+//components
 import Navbar from './components/layout/Navbar';
 import Movies from './components/movies/Movies';
-import { PersistGate } from 'redux-persist/integration/react'
-
-
+import Footer from './components/layout/Footer'
+//redux
 import { Provider } from 'react-redux';
-import {store, persistor} from './redux/store'
-
-
+import {store} from './redux/store'
 
 const App = () => {
 
@@ -23,6 +21,7 @@ const App = () => {
      {/* <Route exact path='/' component={Movies} /> */}
     </div>
     <Route exact path='/' component={Movies} />
+    <Footer/>
     </Router>
    </Provider>
   );

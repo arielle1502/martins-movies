@@ -1,23 +1,19 @@
-// the movies component maps over the api data and passes the props to the MovieItem component
+// the movies component maps over the api data and passes the props to the MovieItem component. 6 functions, 4 replace the 'movies' with a language filtered api call. getMovies() loads all of the popular movies. addedToWatched() is passed down the MovieItem child component. IT purpose is to mark the users 'watched' selection and persist the selection on page refesh.
 import React, {Component, Fragment} from 'react';
 import MovieItem from './MovieItem';
-import Spinner from '../layout/Spinner';
-import PropTypes from 'prop-types'
 
 //redux
 import { connect } from 'react-redux';
+//general functions
 import { getMovies } from '../../redux/actions/movieActions'
+import {addToWatched} from '../../redux/actions/movieActions'
+// filtering functions
 import { filterToFrench } from '../../redux/actions/movieActions'
 import { filterToItalian } from '../../redux/actions/movieActions'
 import { filterToSpanish } from '../../redux/actions/movieActions'
 import { filterToMandarin } from '../../redux/actions/movieActions'
-import {addToWatched} from '../../redux/actions/movieActions'
-
 
 class Movies extends Component {
-  constructor(props) {
-    super(props);
-    };
   
     filterToFrench = (e) => {
       e.preventDefault();
@@ -54,7 +50,6 @@ class Movies extends Component {
 
   componentDidMount(){
     this.props.getMovies();
-    console.log('getting movies')
   }
   
   addToWatched = (id) => {
@@ -64,11 +59,12 @@ class Movies extends Component {
   }
 render(){
 
-  const { movies, loading } = this.props;
+  const { movies} = this.props;
    
   return (
     <Fragment>
-      <div class="dropdown show">
+      <div className="container-movies">
+      <div class="dropdown-language show">
   <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Browse By Language
   </a>
@@ -82,27 +78,22 @@ render(){
   </div>
 </div>
       
-            <div style={userStyle}>
+            <div className="movies" style={userStyle}>
             {movies.map(movie =>
-                <MovieItem key={movie.id} markedWatched={ this.props.markedWatched == true}  addToWatched={this.addToWatched} movie={movie}/>
+                <MovieItem key={movie.id} addToWatched={this.addToWatched} movie={movie}/>
             )}
+        </div>
         </div>
         </Fragment>
         )
     }
         
     }
-  
-
-// Movies.propTypes={
-//     movies: PropTypes.array.isRequired,
-//     loading: PropTypes.bool.isRequired
-// }
 
 const userStyle={
     display:'grid',
-    gridTemplateColumns:'repeat(2, 1fr)',
-    gridGap:'1rem',
+    gridTemplateColumns:'repeat(3, 1fr)',
+    gridGap:'3rem',
     paddingTop: '3rem',
    
 }
@@ -115,7 +106,6 @@ const mapDispatchToProps = (dispatch) => {
   return{
     addToWatched:(id) => {
       dispatch(addToWatched(id))
-      
     },
     getMovies: ()=> dispatch(getMovies()),
     filterToFrench: ()=> dispatch(filterToFrench()),

@@ -1,23 +1,15 @@
 import {
   GET_MOVIES,
   SEARCH_MOVIES,
-  LOADING_DATA,
-  ADD_TO_WATCHED
+  ADD_TO_WATCHED,
+  GET_MOVIE_DETAILS
 } from '../types.js';
 import axios from 'axios';
 
-// we are not passing through a paramenter but we are passing through the dispacth function so we need a double arrow function
-// export const getMovies = () => async dispatch => {
-//   // dispatch({ type: LOADING_DATA });
-//   const res = await axios.get('https://api.themoviedb.org/3/movie/popular?api_key=1e448e0dfcdbb565f5d329820065b4d2&language=en-US&page=1');
-//   dispatch({
-//     type: GET_MOVIES,
-//     payload: res.data
-//   })
-// }
+
+// getMovies() loads the popular movies from the api and dispatches it to the 'movies' state
 export const getMovies = () => dispatch => {
-  // dispatch({ type: LOADING_DATA });
-  axios.get('https://api.themoviedb.org/3/movie/popular?api_key=1e448e0dfcdbb565f5d329820065b4d2&language=en-US&page=1')
+  axios.get('https://api.themoviedb.org/3/movie/popular?api_key=1e448e0dfcdbb565f5d329820065b4d2&language=en-US&page=1&append_to_response=imdb_id')
   .then(res => {
     dispatch({
       type: GET_MOVIES,
@@ -27,8 +19,8 @@ export const getMovies = () => dispatch => {
     })
   }
 
+  //searchMovies() take the text from the local state as a parameter and places it in the mutli search keyword query
   export const searchMovies = (text) => dispatch => {
-    // dispatch({ type: LOADING_DATA });
     axios.get(`https://api.themoviedb.org/3/search/multi?api_key=1e448e0dfcdbb565f5d329820065b4d2&language=en-US&query=${text}&page=1&include_adult=false`)
     .then(res => {
       dispatch({
@@ -38,7 +30,7 @@ export const getMovies = () => dispatch => {
       
     })}
 
-
+    //addToWatched() takes the id of the movie that was clicked and dispatches it to the 'watched' state
     export const addToWatched = (id) => {
       return{
         type: ADD_TO_WATCHED,
@@ -47,9 +39,8 @@ export const getMovies = () => dispatch => {
         }
       }
     }
-
+// filterToFrench() loads all of the french language movies from the api and dispatches it to the 'movies' state
     export const filterToFrench = () => dispatch => {
-      // dispatch({ type: LOADING_DATA });
       axios.get('http://api.themoviedb.org/3/discover/movie?api_key=1e448e0dfcdbb565f5d329820065b4d2&language=fr')
       .then(res => {
         dispatch({
@@ -59,9 +50,8 @@ export const getMovies = () => dispatch => {
         
         })
       }
-
+// filterToItalian() loads all of the italian language movies from the api and dispatches it to the 'movies' state
       export const filterToItalian = () => dispatch => {
-        // dispatch({ type: LOADING_DATA });
         axios.get('http://api.themoviedb.org/3/discover/movie?api_key=1e448e0dfcdbb565f5d329820065b4d2&language=it')
         .then(res => {
           dispatch({
@@ -71,8 +61,8 @@ export const getMovies = () => dispatch => {
           
           })
         }
+        // filterToSpanish() loads all of the spanish language movies from the api and dispatches it to the 'movies' state
         export const filterToSpanish = () => dispatch => {
-          // dispatch({ type: LOADING_DATA });
           axios.get('http://api.themoviedb.org/3/discover/movie?api_key=1e448e0dfcdbb565f5d329820065b4d2&language=es')
           .then(res => {
             dispatch({
@@ -82,9 +72,8 @@ export const getMovies = () => dispatch => {
             
             })
           }
-
+          // filterToMandarin() loads all of the manadrin language movies from the api and dispatches it to the 'movies' state
           export const filterToMandarin = () => dispatch => {
-            // dispatch({ type: LOADING_DATA });
             axios.get('http://api.themoviedb.org/3/discover/movie?api_key=1e448e0dfcdbb565f5d329820065b4d2&language=zh')
             .then(res => {
               dispatch({
@@ -94,5 +83,3 @@ export const getMovies = () => dispatch => {
               
               })
             }
-
-            

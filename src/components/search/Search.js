@@ -1,4 +1,4 @@
-// the search component takes the text that the uer eneters into the searchbar and holds it in a state, the seachMovies function is then called and the text within the state is used to search the api data
+// the search component takes the text that the uer eneters into the searchbar and holds it in state, the seachMovies function is then called and the text within the state is used to search the api data
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -14,18 +14,15 @@ export class Search extends Component {
 
     static propTypes = {
         searchMovies: PropTypes.func.isRequired,
-        // clearMovies: PropTypes.func.isRequired,
         setAlert: PropTypes.func.isRequired
         
     }
     onSubmit = (e) => {
         e.preventDefault();
-        if(this.state.text === ''){
-            this.props.setAlert('Please enter something!', 'light');
-        }else{
+        
         this.props.searchMovies(this.state.text);
         this.setState({text:''})
-        }
+        
     }
     onChange = (e) =>
         this.setState({[e.target.name]: e.target.value})
@@ -33,20 +30,25 @@ export class Search extends Component {
     render() {
         return (
             <div>
+
+
+<ul class="navbar-nav ml-auto">
+        <li class="nav-item d-flex">
+          <div class="collapse fade" id="searchForm">
                 <form onSubmit= {this.onSubmit} className ="form">
-                    <input className ="searchBar"
+                    <input className ="searchBar border-0 bg-white"
                      type="text"
                      name="text"
                      placeholder="Search Movies.." 
                      value={this.state.text}
                      onChange={this.onChange}/>
-                    <input type="submit" value="Search" className="btn btn-dark btn-block"/>
                 </form>
-                    <button className="btn btn-light btn-block clear" 
-                    onClick={this.props.clearMovies}>Clear Search</button>
-                    <button className="btn btn-light btn-block clear" 
-                    onClick={this.props.filterLang}>Filter to Foriegn Films</button>
-            
+                </div>
+                <a class="nav-link ml-auto" href="#searchForm" data-target="#searchForm" data-toggle="collapse">
+          <i class="fas fa-search"></i>
+          </a>
+            </li>
+      </ul>
                 
             </div>
         )

@@ -1,18 +1,12 @@
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { persistStore, persistReducer, createTransform  } from 'redux-persist' // imports from redux-persist
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 import { composeWithDevTools } from 'redux-devtools-extension';
-import ADD_TO_WATCHED from './reducers/searchReducer'
 
 import thunk from 'redux-thunk';
 
 import searchReducer from './reducers/searchReducer';
 import moviesReducer from './reducers/moviesReducer';
-
-
-const initialState = {};
-
-const middleware = [thunk];
 
 const whiteList = createTransform(
   (inboundState, key) => {
@@ -38,9 +32,8 @@ const whiteList = createTransform(
 
 const persistConfig = { // configuration object for redux-persist
   key: 'primary',
-  storage, // define which storage to use,
+  storage, 
   whitelist:['movies'],
-  // transforms: [whiteList]
 }
 
 
