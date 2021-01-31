@@ -3,9 +3,12 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Movies from './components/movies/Movies';
+import { PersistGate } from 'redux-persist/integration/react'
+
 
 import { Provider } from 'react-redux';
-import store from './redux/store';
+import {store, persistor} from './redux/store'
+
 
 
 const App = () => {
@@ -13,6 +16,7 @@ const App = () => {
    
   return (
     <Provider store={store}>
+
     <Router>
     <div className="App">
      <Navbar/>

@@ -2,7 +2,6 @@ import {
   GET_MOVIES,
   LOADING_DATA,
   SEARCH_MOVIES,
-  ADD_TO_WATCHED
  
 } from '../types.js';
 
@@ -10,7 +9,6 @@ const initialState = {
     movies : [],
     movie:{},
     loading: false, 
-    watched: [],
     alert: null
   
 };
@@ -36,13 +34,6 @@ export default function searchReducer(state = initialState, action){
             movies: action.payload,
             loading:false
           };
-
-          case ADD_TO_WATCHED:
-            watched.push(action.payload);
-            return{
-              ...state,
-              watched:watched
-            };
 
       default:
         return state;

@@ -1,15 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400&display=swap');
+body{
+  font-family: 'Quicksand', sans-serif;
+}
+
 .blackButton{
   background-color: black;
+  color:white;
 }
 
 .whiteButton{
   background-color: white;
 }
 
-#darkMode{
-  background-color:yellow;
+/* navbar */
+.nav-link{
+  padding:0;
 }
-
-button.light{
-  background-color:red;
+.dropdown-toggle::after {
+  display: none;
 }

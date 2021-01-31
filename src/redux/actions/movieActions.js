@@ -17,14 +17,15 @@ import axios from 'axios';
 // }
 export const getMovies = () => dispatch => {
   // dispatch({ type: LOADING_DATA });
-  axios.get('https://api.themoviedb.org/3/movie/top_rated?api_key=1e448e0dfcdbb565f5d329820065b4d2&language=en-US&page=1')
+  axios.get('https://api.themoviedb.org/3/movie/popular?api_key=1e448e0dfcdbb565f5d329820065b4d2&language=en-US&page=1')
   .then(res => {
     dispatch({
       type: GET_MOVIES,
       payload: res.data.results
     })
     
-  })}
+    })
+  }
 
   export const searchMovies = (text) => dispatch => {
     // dispatch({ type: LOADING_DATA });
@@ -38,13 +39,60 @@ export const getMovies = () => dispatch => {
     })}
 
 
-    export const addToWatched = (movie) => {
+    export const addToWatched = (id) => {
       return{
         type: ADD_TO_WATCHED,
         payload: {
-          movie
+          id
         }
       }
     }
 
-  
+    export const filterToFrench = () => dispatch => {
+      // dispatch({ type: LOADING_DATA });
+      axios.get('http://api.themoviedb.org/3/discover/movie?api_key=1e448e0dfcdbb565f5d329820065b4d2&language=fr')
+      .then(res => {
+        dispatch({
+          type: GET_MOVIES,
+          payload: res.data.results
+        })
+        
+        })
+      }
+
+      export const filterToItalian = () => dispatch => {
+        // dispatch({ type: LOADING_DATA });
+        axios.get('http://api.themoviedb.org/3/discover/movie?api_key=1e448e0dfcdbb565f5d329820065b4d2&language=it')
+        .then(res => {
+          dispatch({
+            type: GET_MOVIES,
+            payload: res.data.results
+          })
+          
+          })
+        }
+        export const filterToSpanish = () => dispatch => {
+          // dispatch({ type: LOADING_DATA });
+          axios.get('http://api.themoviedb.org/3/discover/movie?api_key=1e448e0dfcdbb565f5d329820065b4d2&language=es')
+          .then(res => {
+            dispatch({
+              type: GET_MOVIES,
+              payload: res.data.results
+            })
+            
+            })
+          }
+
+          export const filterToMandarin = () => dispatch => {
+            // dispatch({ type: LOADING_DATA });
+            axios.get('http://api.themoviedb.org/3/discover/movie?api_key=1e448e0dfcdbb565f5d329820065b4d2&language=zh')
+            .then(res => {
+              dispatch({
+                type: GET_MOVIES,
+                payload: res.data.results
+              })
+              
+              })
+            }
+
+            
